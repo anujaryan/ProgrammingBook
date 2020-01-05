@@ -1,0 +1,115 @@
+1.SonarQube is a free and open source “code quality platform.”
+2.It gives you a
+moment-in-time snapshot of your code quality today, as well as trending of lagging
+(what’s already gone wrong) and leading (what’s likely to go wrong in the future) quality indicators.
+3. test coverage (a leading indicator), a score of 50% may not look
+great, but what was it last month? If you’re up from 35%, it’s high-fives all around.
+Down from 70%? Time to shape up.
+4. It also offers quality-management tools to actively help you put it right: IDE integration, integration for Jenkins, a popular Continuous Integration server, and code-review tools.
+5. SonarQube addresses not just bugs but also coding rules, test coverage, duplications, API documentation, complexity, and architecture
+
+
+
+1.From a tester’s standpoint, SonarQube is worth attention because it will help you pinpoint the spots where automated testing is thin or nonexistent. It may also help target
+manual penetration and security testing.
+
+2.From a developer’s standpoint, SonarQube is worth the effort because it helps you
+grow as a coder. From language-specific subtleties to thread safety and resource management, SonarQube can show you what you’re getting wrong—or doing sub-optimally—and point you in the right direction for fixing it. SonarQube helps coders find their goofs
+and fix them quickly.
+
+3.From a software architect’s standpoint, SonarQube is worth the time because it helps
+you keep an eye on whether your cleanly delineated initial design is being degraded
+over time with creeping dependency cycles. It can show you whether the internal coding rules are being followed, and it can help you spot rising complexity that needs to be refactored.
+
+4.From a project management standpoint, SonarQube is worth the focus because testing alone isn’t enough. It can only show whether software does what it’s supposed to do:its level of external quality. On the other hand, SonarQube analyzes and fosters internal quality: whether an application will run optimally and be readily maintainable and extensible down the road.
+
+5.From a business standpoint, SonarQube offers a strong ROI because its acquisition and setup costs are low, and its intuitive interfaces mean that very little training is required. Add to that the fact that its adoption within an organization is typically viral,
+and you’ve got a minimal investment that produces what quickly become significant results.
+
+6. Finally, from a management standpoint, SonarQube is worth the investment because it gives you metrics.
+SonarQube in the fold, you’ve now got trending available on abstract measures of
+code quality. It even offers charts.
+
+Code Quality Tools: FindBugs, PMD,and JaCoCo for Java; and Gallio, Gendarme.
+
+
+App:
+1.Proven technologies
+2.Multilingual: SonarQube speaks your language-> SonarQube is written in Java:  and it started as a way to measure the quality of Java
+projects, but it’s no longer limited to analyzing just Java. There is an ever-growing list
+of languages you can analyze through SonarQube by adding plugins.
+
+
+
+Installatin :
+
+1.https://www.sonarqube.org/downloads/ downloads sonarqube from given link.
+
+
+2. As a non-root user, unzip it, let's say in C:\sonarqube or /opt/sonarqube.
+
+3. As a non-root user, start the SonarQube Server:
+
+# On Windows, execute:
+C:\sonarqube\bin\windows-x86-xx\StartSonar.bat
+
+# On other operating systems, as a non-root user execute:
+/opt/sonarqube/bin/[OS]/sonar.sh console
+
+4.Log in to http://localhost:9000 with System Administrator credentials (login=admin, password=admin).
+
+5.Click the Create new project button to analyze your first project.
+
+
+6.Create a project 
+
+7.Generate a token (security purpose)
+
+8.Select language in which langauge project used.(Java, .Net,python)
+
+9.Select build technology.( Like Maven, Gradle)
+
+10.Then sonar will generate a command 
+
+Like that:
+
+mvn sonar:sonar \
+  -Dsonar.projectKey=Data_Structure \
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.login=216aea709057659c7b0b7e3399e9db12c8fb1c09
+  
+  
+  
+10.Add  below plugin in maven pom file
+
+ <plugin>
+          <groupId>org.sonarsource.scanner.maven</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>3.6.0.1398</version>
+        </plugin>
+		
+11.add below profiles in project pom file:
+
+<profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!-- Optional URL to server. Default value is http://localhost:9000 -->
+                <sonar.host.url>
+                  http://localhost:9000
+                </sonar.host.url>
+            </properties>
+        </profile>
+     </profiles>
+	 
+	 
+	 
+12.then run maven command 
+mvn clean 
+
+13. mvn package sonar:sonar (This command collect the report send to sonarqube
+
+
